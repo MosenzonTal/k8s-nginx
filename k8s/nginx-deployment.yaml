@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: exposed-app
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: dist-app1
+          mountPath: /app1
+        - name: dist-app2
+          mountPath: /app2
+        - name: nginx-conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: dist-app1
+        persistentVolumeClaim:
+          claimName: app1-dist
+      - name: dist-app2
+        persistentVolumeClaim:
+          claimName: app2-dist
+      - name: nginx-conf
+        configMap:
+          name: nginx-config

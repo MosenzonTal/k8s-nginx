@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+    customers_management_dev:
+        build:
+            context: ./Dockerbuild
+            dockerfile: Dockerfile
+        image: "customers_management_image"
+        env_file: .env
+        container_name: "customers_management_dev"
+        hostname: customers_management.dev
+        volumes:
+          - type: bind
+            source: ../
+            target: /customers_management
+        networks:
+            customers_management_nt:
+                ipv4_address: 192.168.125.2
+        restart: always
+networks:
+  customers_management_nt:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.125.0/24

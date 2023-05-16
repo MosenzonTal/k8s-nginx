@@ -1,0 +1,20 @@
+# Base image
+FROM node:15.4 as frontend
+WORKDIR /app
+RUN npm install -g @quasar/cli
+COPY Finops-app-frontend/package*.json ./
+COPY Finops-app-frontend ./
+RUN cd app && npm install && quasar build
+RUN ls -al > ls_output.log
+
+
+FROM node:15.4 as backend
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+COPY --from=frontend /app/app/dist /app/dist
+# CMD tail -f /dev/null
+RUN cd Finops-app-backend && npx tsc app.ts
+EXPOSE 3000
+ENTRYPOINT ["node", "Finops-app-backend/app.js"]

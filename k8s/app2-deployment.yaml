@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  namespace: exposed-app
+  labels:
+    app: app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:
+      - name: app2
+        image: talmosenzon/apps:app2
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "cp -R /app/dist /app2"]
+        volumeMounts:
+          - name: app2
+            mountPath: /app2
+      volumes:
+        - name: app2
+          persistentVolumeClaim:
+            claimName: app2-dist

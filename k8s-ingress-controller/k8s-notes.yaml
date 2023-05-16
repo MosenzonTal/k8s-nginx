@@ -1,0 +1,4 @@
+kubectl get all -n ingress-proj
+
+ingress-controller:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.7.1/deploy/static/provider/cloud/deploy.yaml

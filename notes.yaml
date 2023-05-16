@@ -1,0 +1,24 @@
+
+# i understands that port-forward is working as a bridge from my computer to the container in the pod 
+# i can do port-forward like this: kubectl port-forward deployment/app1 8080:3000
+                                                                        # <host>:<container>
+# then i can go to localhost:8080 to see the app. but it works as long as the command is running.
+#  same in docker run -p <host>:<container> its a bridge between them too.
+
+
+# both backend + frontend are containeried in 1 image right now. should wthink about it. if i should change it
+# because of Nginx or the Architacture.
+
+# but when i did "docker run -p 80:3000 app1", /sum didnt work fine because the frontend sends the data to the backend
+# in localhost:3000 which wasnt exist. with "docker run -p 3000:3000 app1" it worked fine.
+# 
+
+# Why sould i use Nginx? why He gave me to use Nginx? my guess because i have 2 apps: app1, app2- 
+# if i had 1 app should i have been using it?
+
+# i have deploy deployment of my app in the cluster. what next?
+
+# chatgpt said that there 2 ways to expose the app to outside: service / Ingress. is it right?
+
+TO CHECK WHAT TO DO WITH THE AXIOS WHAT IS THE BEST PRACTISE?
+maybe use relative URLs?

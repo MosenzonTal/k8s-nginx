@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: exposed-app
+data:
+  nginx.conf: |
+    events {}
+
+    http {
+        server {
+            listen 80;
+            server_name localhost;
+
+             location / {
+                root /app1/dist/spa;
+                index index.html;
+            }
+
+            location /app2 {
+                alias /app2/dist/spa;
+                index index.html;
+            }
+        }
+    }
+    
