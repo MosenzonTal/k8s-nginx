@@ -6,13 +6,14 @@ metadata:
 data:
   nginx.conf: |
     events {}
-
+    
     http {
+        include  mime.types;
         server {
             listen 80;
             server_name localhost;
 
-             location / {
+            location / {
                 root /app1/dist/spa;
                 index index.html;
             }
@@ -23,4 +24,5 @@ data:
             }
         }
     }
-    
+
+            

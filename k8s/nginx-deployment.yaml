@@ -26,6 +26,10 @@ spec:
         - name: nginx-conf
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
+        - name: nginx-types
+          mountPath: /etc/nginx/mime.types
+          subPath: mime.types
+          readOnly: true
       volumes:
       - name: dist-app1
         persistentVolumeClaim:
@@ -36,3 +40,6 @@ spec:
       - name: nginx-conf
         configMap:
           name: nginx-config
+      - name: nginx-types
+        configMap:
+          name: mime-types
