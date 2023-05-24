@@ -20,12 +20,13 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: dist-app1
-          mountPath: /app1
+          mountPath: apps/app1
         - name: dist-app2
-          mountPath: /app2
+          mountPath: apps/app2
         - name: nginx-conf
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
+          readOnly: true
         - name: nginx-types
           mountPath: /etc/nginx/mime.types
           subPath: mime.types
