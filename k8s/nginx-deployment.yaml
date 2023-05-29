@@ -13,6 +13,13 @@ spec:
       labels:
         app: nginx
     spec:
+      # initContainers:
+      #   - name: setup
+      #     image: busybox
+      #     command: ["chmod", "755", "-R", "/apps"]
+      #     volumeMounts:
+      #       - name: dist-app1
+      #         mountPath: /apps
       containers:
       - name: nginx
         image: nginx:latest
